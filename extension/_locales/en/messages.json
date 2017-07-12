@@ -1,0 +1,14 @@
+{
+  "app_name": {
+    "message": "Sites Cleaner"
+  },
+  "app_shortname": {
+    "message": "Sites Cleaner"
+  },
+  "app_description": {
+    "message": "Hiding unsolicited information on on websites as part of the \"For Safe Internet for Children\" program"
+  },
+   "toolbar_button": {
+    "message": "Sites Cleaner"
+  }
+}
