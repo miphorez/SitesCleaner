@@ -1,11 +1,11 @@
 /*----------------------- online-life --------------------*/
-
-.block_title, .post-title, .footer-wrap {
+.block_title, .post-title, .footer-wrap, .nav, .related-block,
+.subs-cont-block, .favorites-title, div.favorites-nav {
   display: none !important;
   visibility: hidden !important;
 }
 
-#mc-container, #films, #vk_groups, #document, #back-top-x {
+#mc-container, #films, #vk_groups, #back-top-x, #right{
   display: none !important;
   visibility: hidden !important;
 }
@@ -14,4 +14,31 @@ noindex {
   display: none !important;
   visibility: hidden !important;
 }
+
+/*----------------------- youtube.com --------------------*/
+#movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles.ytp-endscreen-paginate > div {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+#movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-endscreen-paginate.ytp-show-tiles > button.ytp-button.ytp-endscreen-next {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+#movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-endscreen-paginate.ytp-show-tiles > button.ytp-button.ytp-endscreen-previous {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+#movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+#watch7-sidebar-contents, #feed, #watch-discussion {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 
