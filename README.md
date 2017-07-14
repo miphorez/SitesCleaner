@@ -14,7 +14,9 @@
 
 На страницы внедряется JS- и CSS-файл, который скрывает потенциально опасные блоки информации на сайтах.
 
-## License
+## Какие сайты контролируются расширением?
+
+online-life.club, youtube.com## License
 
 This software is released under the terms of the GNU GPLv3 license.
 
