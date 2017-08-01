@@ -4,7 +4,7 @@
   "short_name": "__MSG_app_shortname__",
   "description": "__MSG_app_description__",
   "default_locale": "ru",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage_url": "https://ilovejavaforever.wordpress.com/portfolio/portfolio-chrome-extensions/sites-cleaner/",
   "icons": {
     "16": "images/SiteCleaner(16).png",

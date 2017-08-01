@@ -1,7 +1,5 @@
 /*----------------------- online-life --------------------*/
 
-
-
 /*----------------------- youtube.com --------------------*/
 #movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles.ytp-endscreen-paginate > div {
   display: none !important;
@@ -29,15 +27,6 @@
 }
 
 /*----------------------- twitter.com --------------------*/
-#page-container > div.dashboard.dashboard-left > div.module.Trends.trends,
-#page-container > div.dashboard.dashboard-right,
-#page-container > div.dashboard.dashboard-left > div.Footer.module.roaming-module,
-#page-container > div.dashboard.dashboard-left > div.module.wtf-module.js-wtf-module.roaming-module.has-content,
-div.MoveableModule
-{
-  display: none !important;
-  visibility: hidden !important;
-}
 .twitter_link_to_accaunt {
   background: white;
   box-sizing: border-box;
@@ -47,26 +36,14 @@ div.MoveableModule
 
 
 /*----------------------- onlinemultfilmy.ru --------------------*/
-#sidebar, #M51769Composite618594, #content > div > div.bottom-line,
-#content > div > div.soc-buttons,
-#content > div > div.comments-box,
-#bottom-search,
-#add_favorite_tooltip,
-#content > div > div.warn,
-#content > div > div:nth-child(17) {
-  display: none !important;
-  visibility: hidden !important;
-}
-
-#left-sidebar > div.ggd_box,
-#wrap > div.top-block > div.buttons-top,
-.header-wrapper,
-#content > div.buttons-row {
-  display: none !important;
-  visibility: hidden !important;
-}
 
 /*----------------------- vk.com --------------------*/
+#ads_left, #feed_filters, 
+._post.post.page_block._ads_promoted_post_data_w.mailru-visibility-check
+{
+  display: none !important;
+  visibility: hidden !important;
+}
 .wall_module .replies_wrap,
 .wall_module .reply_link_wrap {
   display: none !important;

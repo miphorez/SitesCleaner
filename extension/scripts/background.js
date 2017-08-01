@@ -1,14 +1,19 @@
 (function(window, chrome) {
     "use strict";
 
-    var arrayURLs = {
-        'online-life': 'onlinelife.js', 
-        'vk.com': 'vkcom.js', 
-        'onlinemultfilmy.ru': 'onlinemultfilmy.js', 
-        'twitter.com': 'twitter.js', 
-        'youtube.com': 'youtube.js' 
-      };
+    function UrlForControl(url, js, unClear) {
+        this.url = url;
+        this.js = js;
+        this.unClear = unClear;
+    };
 
+    var arrayURLs = [
+        new UrlForControl('online-life', 'onlinelife.js', true),
+        new UrlForControl('vk.com', 'vkcom.js', false),
+        new UrlForControl('onlinemultfilmy.ru', 'onlinemultfilmy.js', true),
+        new UrlForControl('twitter.com', 'twitter.js', true),
+        new UrlForControl('youtube.com', 'youtube.js', true)
+    ];    
 
      // * Тайм-аут используется для повторного использования, если необходимо
     var updateTimeout = -1;
@@ -38,20 +43,22 @@
             ctrlInTab(tabId);
             update();
         }
-        if ((changeInfo.status === 'complete') && isExecJScript()){
+        if (changeInfo.status === 'complete'){
             checkURL(tab, tabId);
         }
     });
 
-    function isControlledSite(tab) {
-        var front = isEnabled(tab);
-
-        for (var url in arrayURLs) {
-          if (tab.url.indexOf(url) !== -1){
-            changeIcon(front ? "" : "r");
-            return true;
-          }
-        }
+    function isControlledSite(isFront, strTabURL) {
+        var flYes = false;
+        arrayURLs.forEach(function(item, index, array) {
+            var strUrl = item.url;
+            if (strTabURL.indexOf(strUrl) !== -1){
+                changeIcon(isFront ? "" : "r");
+                flYes = true;
+                return true;
+            }
+        });
+        if (flYes) return;
         changeIcon('off');
         return false;
     }
@@ -62,10 +69,21 @@
         });
     }
 
-    function checkURL(tab, tabId){
+    function isSiteUnClearing(tab){
+        var flYes = false;
+        arrayURLs.forEach(function(item, index, array) {
+            if (tab.url.indexOf(item.url) !== -1){
+                flYes = item.unClear;
+            }
+        });
+        return flYes;
+    }
 
-        for (var iURL in arrayURLs) {
-          if (tab.url.indexOf(iURL) !== -1){
+    function checkURL(tab, tabId) {
+        if (!isExecJScript() && isSiteUnClearing(tab)) return;
+
+        arrayURLs.forEach(function(item, index, array) {
+          if (tab.url.indexOf(item.url) !== -1){
             chrome.tabs.executeScript(tabId, {
                 file: "scripts/jquery-3.2.1.min.js",
                 allFrames: true,
@@ -73,20 +91,20 @@
                 runAt: "document_start"
             }, function() {chrome.runtime.lastError; });
             chrome.tabs.executeScript(tabId, {
-                file: "scripts/"+"css_"+arrayURLs[iURL],
+                file: "scripts/"+"css_"+item.js,
                 allFrames: true,
                 matchAboutBlank: true,
                 runAt: "document_start"
             }, function() {chrome.runtime.lastError; });
             chrome.tabs.executeScript(tabId, {
-                file: "scripts/"+arrayURLs[iURL],
+                file: "scripts/"+item.js,
                 allFrames: true,
                 matchAboutBlank: true,
                 runAt: "document_start"
             }, function() {chrome.runtime.lastError; });
             return;
           }
-        }
+        });
 
     }
 
@@ -114,7 +132,6 @@
      // * Включить включенное состояние
     function toggle() {
         sync.front = sync.front ? 0 : -1;
-        // alert(sync.front);
         chrome.storage.sync.set(sync);
         update();
         chrome.tabs.reload();
@@ -218,7 +235,7 @@
             if (sync.toggle) {
                 front = sync.front >= 0;
             }
-            isControlledSite(tabs[0]);
+            isControlledSite(isEnabled(tabs[0]), tabs[0].url);
             // chrome.browserAction.setTitle({title: chrome.i18n.getMessage(front ? "extTitleEnabled" : "extTitleDisabled")});
             // chrome.browserAction.setPopup({popup: sync.toggle ? "" : "popup.html"});
         });
@@ -248,11 +265,4 @@
     chrome.runtime.onStartup.addListener(startup);
 
 }(window, chrome));
-
-chrome.runtime.onMessageExternal.addListener(function (req, sender, sendResponse) {
-    if (req.method === 'getLocalStorage') {
-console.info("sendResponse");
-        sendResponse({globalStatus: "goodbye"});
-    }
-});
 
