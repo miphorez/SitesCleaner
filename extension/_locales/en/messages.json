@@ -10,5 +10,13 @@
   },
    "toolbar_button": {
     "message": "Sites Cleaner"
+  },
+  "keyboardShortcutToggle": {
+    "message": "Toggle disable Sites Cleaner",
+    "description": "Keyboard shortcut, toggles between Enabled and Disabled Sites Cleaner."
+  },
+  "keyboardShortcutIgnore": {
+    "message": "Toggle ignoring Sites Cleaner for current domain",
+    "description": "Keyboard shortcut, toggles whether the current domain is on the ignore Sites Cleaner."
   }
 }

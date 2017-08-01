@@ -4,21 +4,21 @@
   "short_name": "__MSG_app_shortname__",
   "description": "__MSG_app_description__",
   "default_locale": "ru",
-  "version": "0.0.4",
+  "version": "0.1.1",
+  "homepage_url": "https://ilovejavaforever.wordpress.com/portfolio/portfolio-chrome-extensions/sites-cleaner/",
   "icons": {
     "16": "images/SiteCleaner(16).png",
-    "19": "images/SiteCleaner(19).png",
-    "38": "images/SiteCleaner(38).png",
-    "64": "images/SiteCleaner(64).png",
+    "48": "images/SiteCleaner(48).png",
     "128": "images/SiteCleaner(128).png"
   },
+
    "browser_action": {
     "default_icon": {
-      "19": "images/SiteCleaner(19).png",
-      "38": "images/SiteCleaner(38).png"
+      "48": "images/SiteCleaner(48).png"
     },
     "default_title": "__MSG_toolbar_button__"
   },
+
   "background": {
     "persistent": false,
     "scripts": [
@@ -28,15 +28,24 @@
 
   "permissions": [
     "tabs",
+    "storage",
     "activeTab",
-    "http://*/*",
-    "https://*/*"
+    "<all_urls>"
   ],
+
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
 
   "content_scripts": [
     {
       "matches": [
         "*://*.online-life.club/*",
+        "*://*.vk.com/*",
+        "*://*.onlinemultfilmy.ru/*",
+        "*://*.twitter.com/*",
         "*://*.youtube.com/*"
       ],
       "css": [
@@ -54,7 +63,23 @@
 
   "externally_connectable": {
     "matches": ["*://*.youtube.com/*"]
-}
+  },
+
+  "commands": {
+    "toggle": {
+      "suggested_key": {
+        "default": "Alt+N"
+      },
+      "description": "__MSG_keyboardShortcutToggle__"
+    },
+    "ignore": {
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      },
+      "description": "__MSG_keyboardShortcutIgnore__"
+    }
+  }
+  
 
 
 }
