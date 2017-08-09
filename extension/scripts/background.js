@@ -1,18 +1,20 @@
-(function(window, chrome) {
-    "use strict";
+"use strict";
 
-    function UrlForControl(url, js, unClear) {
-        this.url = url;
-        this.js = js;
-        this.unClear = unClear;
+(function(window, chrome) {
+
+    function UrlForControl(url, js, unClear, isJQuery) {
+        this.url = url;           //контролируемый домен  
+        this.js = js;             //имя используемого скрипта
+        this.unClear = unClear;   //true - использовать режим с отключенной очисткой
+        this.isJQuery = isJQuery; //true - использовать язык jquery
     };
 
     var arrayURLs = [
-        new UrlForControl('online-life', 'onlinelife.js', true),
-        new UrlForControl('vk.com', 'vkcom.js', false),
-        new UrlForControl('onlinemultfilmy.ru', 'onlinemultfilmy.js', true),
-        new UrlForControl('twitter.com', 'twitter.js', true),
-        new UrlForControl('youtube.com', 'youtube.js', true)
+        new UrlForControl('online-life', 'onlinelife.js', true, false),
+        new UrlForControl('onlinemultfilmy.ru', 'onlinemultfilmy.js', true, false),
+        new UrlForControl('twitter.com', 'twitter.js', true, false),
+        new UrlForControl('vk.com', 'vkcom.js', false, true),
+        new UrlForControl('youtube.com', 'youtube.js', true, true)
     ];    
 
      // * Тайм-аут используется для повторного использования, если необходимо
@@ -84,18 +86,14 @@
 
         arrayURLs.forEach(function(item, index, array) {
           if (tab.url.indexOf(item.url) !== -1){
-            chrome.tabs.executeScript(tabId, {
-                file: "scripts/jquery-3.2.1.min.js",
-                allFrames: true,
-                matchAboutBlank: true,
-                runAt: "document_start"
+            if (item.isJQuery) {
+                chrome.tabs.executeScript(tabId, {
+                    file: "scripts/jquery-3.2.1.min.js",
+                    allFrames: true,
+                    matchAboutBlank: true,
+                    runAt: "document_start"
             }, function() {chrome.runtime.lastError; });
-            chrome.tabs.executeScript(tabId, {
-                file: "scripts/"+"css_"+item.js,
-                allFrames: true,
-                matchAboutBlank: true,
-                runAt: "document_start"
-            }, function() {chrome.runtime.lastError; });
+            }
             chrome.tabs.executeScript(tabId, {
                 file: "scripts/"+item.js,
                 allFrames: true,
@@ -117,16 +115,16 @@
     }
 
     // Следите за созданием новых вкладок, установите фокус, если включено
-    chrome.tabs.onCreated.addListener(function(tab) {
-        ctrlInTab(tab.id);
-        if (tab.url !== "chrome://newtab/") {
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                if (isEnabled(tab, tabs[0])) {
-                    chrome.tabs.update(tab.id, {selected: true});
-                }
-            });
-        }
-    });
+    // chrome.tabs.onCreated.addListener(function(tab) {
+    //     ctrlInTab(tab.id);
+    //     if (tab.url !== "chrome://newtab/") {
+    //         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    //             if (isEnabled(tab, tabs[0])) {
+    //                 chrome.tabs.update(tab.id, {selected: true});
+    //             }
+    //         });
+    //     }
+    // });
 
 
      // * Включить включенное состояние

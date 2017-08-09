@@ -1,24 +1,62 @@
 'use strict';
+function delElementById(content){
+        var elementsContentById = document.getElementById(content);
+        if (elementsContentById){
+                elementsContentById.parentNode.removeChild(elementsContentById);
+        }
+}
 
-function delContent(){
-        var elementsContentByClass = document.getElementsByClassName('post');
+function delElementByClass(content){
+        var elementsContentByClass = document.getElementsByClassName(content);
         if (elementsContentByClass){
-            console.log(elementsContentByClass); 
             while(elementsContentByClass.length > 0){
                 elementsContentByClass[0].parentNode.removeChild(elementsContentByClass[0]);
             }        
         }
 }
 
-(function controlContentOnPages(){
+delElementById("sidebar");
+delElementById("M51769Composite618594");
+delElementById("bottom-search");
+delElementById("add_favorite_tooltip");
+delElementById("content > div > div:nth-child(17)");
+
+delElementByClass("ggd_box");
+delElementByClass("buttons-top");
+delElementByClass("buttons-row");
+delElementByClass("yawidget");
+delElementByClass("link_text");
+delElementByClass("bottom-line");
+delElementByClass("soc-buttons");
+delElementByClass("comments-box");
+delElementByClass("warn");
+
+
+
+(function controlContentOnPages(chrome){
+    // запрет нежелательных обращений
+    chrome.webRequest.onBeforeRequest.addListener(
+        function(details) {
+            console.log(details.url);
+            // return {cancel: 
+            //     details.url.indexOf("yandex.ru") != -1
+            // };
+            return {cancel: 
+                false
+            };
+        },
+        {urls: ["<all_urls>"]},
+        ["blocking"]
+    );
+    
     var elementsByClass = document.getElementsByClassName('age_icon age_icon_16');
     if (elementsByClass.length>0){
-        delContent();
+        delElementByClass('post');
         return;
     }
     elementsByClass = document.getElementsByClassName('age_icon age_icon_18');
     if (elementsByClass.length>0){
-        delContent();
+        delElementByClass('post');
         return;
     }
 
@@ -38,7 +76,7 @@ function delContent(){
                     (hrefCategoriesA.indexOf("etti") !== -1) ||
                     (hrefCategoriesA.indexOf("zombi") !== -1)
                     ){
-                        delContent();
+                        delElementByClass('post');
                         return;
                 }
                 cntCategoriesA++;
@@ -73,15 +111,4 @@ function delContent(){
         }
         return;
     }
-// for(var ii =0; ii<posts.length; ii++) {
-    //         if(posts[ii].innerText.search(textArr) > 0) {
-    //             var thepost = document.getElementsByClassName('feed_row')[ii].children[0];
-    //             var idToDel = thepost.getAttribute('id').split('post')[1];
-    //             var delElement = document.getElementById('post'+idToDel);
-    //             if(delElement) {
-    //                 // console.log(delElement);
-    //                 delElement.parentElement.removeChild(delElement);
-    //             }
-    //         }
-    // }
-}());   
+}(chrome));   
