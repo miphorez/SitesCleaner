@@ -18,5 +18,14 @@
   "keyboardShortcutIgnore": {
     "message": "Активировать/деактивировать чистильщик сайтов для домена",
     "description": "Игнорировать чистильщик сайтов для этого домена"
+  },
+      "enabled": {
+    "message": "Enabled",
+    "description": "State displayed in popup."
+  },
+  "donate": {
+    "message": "Donate...",
+    "description": "Option displayed in popup, opens a popup window to paypal."
   }
+
 }

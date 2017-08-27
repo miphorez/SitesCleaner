@@ -18,5 +18,14 @@
   "keyboardShortcutIgnore": {
     "message": "Toggle ignoring Sites Cleaner for current domain",
     "description": "Keyboard shortcut, toggles whether the current domain is on the ignore Sites Cleaner."
+  },
+    "enabled": {
+    "message": "Enabled",
+    "description": "State displayed in popup."
+  },
+  "donate": {
+    "message": "Donate...",
+    "description": "Option displayed in popup, opens a popup window to paypal."
   }
+
 }

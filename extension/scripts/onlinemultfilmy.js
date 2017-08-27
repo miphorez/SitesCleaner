@@ -32,23 +32,8 @@ delElementByClass("comments-box");
 delElementByClass("warn");
 
 
-
 (function controlContentOnPages(chrome){
-    // запрет нежелательных обращений
-    chrome.webRequest.onBeforeRequest.addListener(
-        function(details) {
-            console.log(details.url);
-            // return {cancel: 
-            //     details.url.indexOf("yandex.ru") != -1
-            // };
-            return {cancel: 
-                false
-            };
-        },
-        {urls: ["<all_urls>"]},
-        ["blocking"]
-    );
-    
+
     var elementsByClass = document.getElementsByClassName('age_icon age_icon_16');
     if (elementsByClass.length>0){
         delElementByClass('post');
@@ -60,6 +45,38 @@ delElementByClass("warn");
         return;
     }
 
+    //реклама игр
+    var eDivByGame = document.getElementsByTagName('div');
+    var cntDivByGame = 0;
+    var lastDivByGame = null;
+    while (cntDivByGame < eDivByGame.length) {
+        var flYes = false;
+        var eImgByGame = eDivByGame[cntDivByGame].getElementsByTagName('a');
+        var cntImgByGame = 0;
+        while (cntImgByGame < eImgByGame.length) {
+            var hrefImgByGame = eImgByGame[cntImgByGame].getAttribute('href');
+            // console.log(hrefImgByGame);
+
+            if (hrefImgByGame != null)
+                if ((hrefImgByGame.indexOf("gamezgid.ru") !== -1)
+                    ){
+                        console.log(hrefImgByGame);
+                    flYes = true;
+                    break;
+                }
+
+            cntImgByGame++;
+        }
+
+        if (flYes){
+            console.log(eDivByGame[cntDivByGame]);
+            lastDivByGame = eDivByGame[cntDivByGame];
+        }
+
+        cntDivByGame++;
+    }
+    if (lastDivByGame != null) lastDivByGame.parentNode.removeChild(lastDivByGame);
+
     //категория фильма
     elementsByClass = document.getElementsByClassName('post-categories');
     if (elementsByClass.length>0){
@@ -67,7 +84,7 @@ delElementByClass("warn");
             var cntCategoriesA = 0;
             while (cntCategoriesA < eCategoriesA.length) {
                 var hrefCategoriesA = eCategoriesA[cntCategoriesA].getAttribute('href');
-                console.log(hrefCategoriesA);
+                // console.log(hrefCategoriesA);
                 if ((hrefCategoriesA.indexOf("shoujo-ai") !== -1) ||
                     (hrefCategoriesA.indexOf("vampiry") !== -1) ||
                     (hrefCategoriesA.indexOf("demony") !== -1) ||
@@ -77,7 +94,7 @@ delElementByClass("warn");
                     (hrefCategoriesA.indexOf("zombi") !== -1)
                     ){
                         delElementByClass('post');
-                        return;
+                        break;
                 }
                 cntCategoriesA++;
             }
@@ -86,7 +103,7 @@ delElementByClass("warn");
     //меню выбора жанров аниме
     elementsByClass = document.getElementsByClassName('genre-menu');
     if (elementsByClass.length>0){
-        console.log(elementsByClass);
+        // console.log(elementsByClass);
         var elementsUL = elementsByClass[0].getElementsByTagName('ul');
         for(var iUL =0; iUL<elementsUL.length; iUL++) {
             var elementsLI = elementsUL[iUL].getElementsByTagName('li');
@@ -94,7 +111,7 @@ delElementByClass("warn");
             while (cntLI < elementsLI.length) {
                 var elementsA = elementsLI[cntLI].getElementsByTagName('a');
                 var hrefA = elementsA[0].getAttribute('href');
-                console.log(hrefA);
+                // console.log(hrefA);
                 if ((hrefA.indexOf("shoujo-ai") !== -1) ||
                     (hrefA.indexOf("vampiry") !== -1) ||
                     (hrefA.indexOf("demony") !== -1) ||
@@ -109,6 +126,5 @@ delElementByClass("warn");
                 cntLI++;
             }
         }
-        return;
     }
 }(chrome));   

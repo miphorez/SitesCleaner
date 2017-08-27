@@ -1,26 +1,26 @@
 {
-  "manifest_version": 2,
   "name": "__MSG_app_name__",
+  "manifest_version": 2,
   "short_name": "__MSG_app_shortname__",
   "description": "__MSG_app_description__",
   "default_locale": "ru",
-  "version": "0.1.5",
+  "version": "1.0.3",
   "homepage_url": "https://ilovejavaforever.wordpress.com/portfolio/portfolio-chrome-extensions/sites-cleaner/",
   "icons": {
-    "16": "images/SiteCleaner(16).png",
     "48": "images/SiteCleaner(48).png",
     "128": "images/SiteCleaner(128).png"
   },
 
    "browser_action": {
     "default_icon": {
-      "48": "images/SiteCleaner(48).png"
+      "19": "images/SiteCleaner(19).png",
+      "38": "images/SiteCleaner(38).png"
     },
     "default_title": "__MSG_toolbar_button__"
   },
 
   "background": {
-    "persistent": false,
+    "persistent": true,
     "scripts": [
       "scripts/background.js"
     ]
@@ -30,14 +30,14 @@
     "tabs",
     "storage",
     "activeTab",
-    "<all_urls>"
+    "<all_urls>",
+    "webRequest","webRequestBlocking"
   ],
 
-  "options_page": "options/options.html",
-  "options_ui": {
-    "page": "options/options.html",
-    "chrome_style": true
-  },
+  // "options_ui": {
+  //   "page": "options/options.html",
+  //   "chrome_style": true
+  // },
 
   "content_scripts": [
     {
@@ -73,12 +73,6 @@
         "default": "Alt+N"
       },
       "description": "__MSG_keyboardShortcutToggle__"
-    },
-    "ignore": {
-      "suggested_key": {
-        "default": "Alt+Shift+N"
-      },
-      "description": "__MSG_keyboardShortcutIgnore__"
     }
   }
   

@@ -36,24 +36,6 @@ function addButtons() {
 };
 addButtons();
 
-// chrome.runtime.sendMessage({ method: 'getLocalStorage' }, function (res) {
-//     // if (!res.globalStatus) {
-// console.log(res);
-//     if (res) {
-//         addButtons();
-//         var observer = new MutationObserver(function () {
-//             addButtons();
-//         });
-//         observer.observe(document.getElementById('content'), {
-//             childList: true,
-//             subtree: true
-//         });
-//         return;
-//     }
-//     document.body.classList.add('-global-off');
-// });
-
-
 function hunt() {
     var textArr = 'Рекламная запись';
     var posts = document.getElementsByClassName('feed_row');
