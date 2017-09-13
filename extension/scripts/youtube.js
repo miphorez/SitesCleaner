@@ -9,32 +9,21 @@
     }
     document.documentElement.appendChild(s)
 }(document));
-
-
-function delElementById(content){
-        if (content === '') return;
-        var elementsContentById = document.getElementById(content);
-        if (elementsContentById){
-                elementsContentById.parentNode.removeChild(elementsContentById);
-        }
+ 
+ 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function delElementByClass(content){
-        if (content === '') return;
-        var elementsContentByClass = document.getElementsByClassName(content);
-        if (elementsContentByClass){
-            while(elementsContentByClass.length > 0){
-                elementsContentByClass[0].parentNode.removeChild(elementsContentByClass[0]);
-            }        
-        }
+async function waitJQ() {
+  await sleep(1111);
+    $(document).ready(function(){
+        // $("#items").remove();
+        // $("#continuations").remove();
+        $("#comments").remove();
+        // $("#page-manager > ytd-browse").remove();
+        // $("#contents > ytd-item-section-renderer").remove();
+        // $("#contents > ytd-vertical-channel-section-renderer").remove();
+    });
 }
-delElementById("movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles.ytp-endscreen-paginate > div");
-delElementById("movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-endscreen-paginate.ytp-show-tiles > button.ytp-button.ytp-endscreen-next");
-delElementById("movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-endscreen-paginate.ytp-show-tiles > button.ytp-button.ytp-endscreen-previous");
-delElementById("movie_player > div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles");
-delElementById("watch7-sidebar-contents");
-delElementById("feed");
-delElementById("appbar-content");
-delElementById("watch-discussion");
-
-delElementByClass("");
+waitJQ();

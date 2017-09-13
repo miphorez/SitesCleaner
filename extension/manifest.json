@@ -4,7 +4,7 @@
   "short_name": "__MSG_app_shortname__",
   "description": "__MSG_app_description__",
   "default_locale": "ru",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "homepage_url": "https://ilovejavaforever.wordpress.com/portfolio/portfolio-chrome-extensions/sites-cleaner/",
   "icons": {
     "48": "images/SiteCleaner(48).png",
@@ -34,10 +34,6 @@
     "webRequest","webRequestBlocking"
   ],
 
-  // "options_ui": {
-  //   "page": "options/options.html",
-  //   "chrome_style": true
-  // },
 
   "content_scripts": [
     {
@@ -60,6 +56,7 @@
   ],
 
   "web_accessible_resources": [
+    "scripts/jquery-3.2.1.min.js",
     "scripts/stopautoplay.js"
   ],
 

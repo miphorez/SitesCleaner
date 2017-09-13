@@ -207,6 +207,7 @@
 		 * @param 	{Object}    	player 		The Youtube Player API Object
 		 */
 		window.onYouTubePlayerReady = function (player) {
+			if (typeof player === 'undefined') {return;};
 			console.log('player ready', player, player.getPlayerState(), player.getCurrentTime());
 
 			if (player.getPlayerState() === 3) { 

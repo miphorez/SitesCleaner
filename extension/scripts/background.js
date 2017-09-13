@@ -5,14 +5,17 @@ var DEBUG_REQUEST = false;
 var blackListRequests = [
 
     //------------- onlinemultfilmy.ru -------------
-        "yandex", "vk.com/share.php", "platform.twitter.com", "syndication.twitter.com",
-        "onedrive.su", "yastatic", "counter", "static.doubleclick.net",
-        "marketgid.com", 
-        "connect.ok", "connect.mail.ru"
+        // "yandex", "vk.com/share.php", 
+        "platform.twitter.com", "syndication.twitter.com",
+        "onedrive.su", 
+        "yastatic", "counter", "static.doubleclick.net",
+        // "connect.ok", "connect.mail.ru"
+
         // "clients6.google.com", "www.googleapis.com",
         // "https://www.google.by/complete/search?client=chrome-omni&gs_ri=chrome-ext-ansg",
         // "googleads.g.doubleclick.net"
 
+        "marketgid.com"
     ];
 
 function forEachInArray(strForFinding){
@@ -52,7 +55,7 @@ function forEachInArray(strForFinding){
         new UrlForControl('onlinemultfilmy.ru', 'onlinemultfilmy.js', true, false),
         new UrlForControl('twitter.com', 'twitter.js', true, true),
         new UrlForControl('vk.com', 'vkcom.js', false, false),
-        new UrlForControl('youtube.com', 'youtube.js', true, false)
+        new UrlForControl('youtube.com', 'youtube.js', true, true)
     ];    
 
      // * Синхронизация данных, в настоящее время только параметры
@@ -160,9 +163,11 @@ function forEachInArray(strForFinding){
      // * Обновить значок, название и действие
     function update() {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            isControlledSite(sync.enable, tabs[0].url);
-            // chrome.browserAction.setTitle({title: chrome.i18n.getMessage(front ? "extTitleEnabled" : "extTitleDisabled")});
-            // chrome.browserAction.setPopup({popup: sync.enable ? "../options/popup.html" : ""});
+            // if (tabs.length != 0){           
+                isControlledSite(sync.enable, tabs[0].url);
+                // chrome.browserAction.setTitle({title: chrome.i18n.getMessage(front ? "extTitleEnabled" : "extTitleDisabled")});
+                // chrome.browserAction.setPopup({popup: sync.enable ? "../options/popup.html" : ""});
+            // }
         });
     }
 
